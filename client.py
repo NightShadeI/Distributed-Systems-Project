@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import socket
 import sys
 import xml.etree.ElementTree as ET
@@ -17,16 +19,16 @@ def biggestserver(node):
 if __name__ == "__main__":
   s = socket.socket()
   s.connect(('127.0.0.1', 50000))
-  
+
   s.send('HELO'.encode())
   data = s.recv(1024).decode()
   if(data == 'OK'):
     s.send('AUTH root'.encode())
     data = s.recv(1024).decode()
-  
+
   biggestServerName = biggestserver(ET.parse('system.xml').getroot())
   start = True
-  
+
   while (data == 'OK'):
     if start:
       s.send('REDY'.encode())
