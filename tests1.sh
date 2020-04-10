@@ -42,13 +42,17 @@ for conf in $configDir/*.xml; do
 		sleep 1
 		./ds-client -n
 	fi
-	
+
 	echo "running your implementation ($1)..."
 	sleep 2
 	if [ -z $2 ]; then
 		./ds-server -c $conf -v brief > $conf.your.log&
+		sleep 1
+                python client.py
 	else
 		./ds-server -c $conf -v brief -n > $conf.your.log&
+		sleep 1
+		python client.py
 	fi
 	sleep 1
 	if [ -f $1 ] && [[ $1 == *".class" ]]; then
