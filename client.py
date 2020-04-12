@@ -41,5 +41,5 @@ if __name__ == "__main__":
     elif data.split()[0] == 'NONE':
       s.send('QUIT'.encode())
       data = s.recv(1024).decode()
-      #test2
+      #test
   s.close()
