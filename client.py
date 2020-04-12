@@ -40,4 +40,5 @@ if __name__ == "__main__":
     elif data.startswith("NONE"):
       s.send("QUIT".encode())
       data = s.recv(1024).decode()
+      #test
   s.close()
