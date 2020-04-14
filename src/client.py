@@ -29,7 +29,7 @@ if __name__ == "__main__":
     while (data == "OK"):
         data = s.recv(1024).decode() 
         if data.startswith("JOBN"):
-            dataSend = " ".join(["SCHD",data.split()[2],biggestServerName,"0"])
+            dataSend = " ".join(["SCHD",data.split()[2], biggestServerName, "0"])
             s.send(dataSend.encode())
             data = s.recv(1024).decode()
             s.send("REDY".encode())
