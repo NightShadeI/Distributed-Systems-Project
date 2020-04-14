@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import socket
-import sys
+import os
 import xml.etree.ElementTree as ET
 
 def biggestserver(servers):
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         data = s.recv(1024).decode()
         s.send("REDY".encode())
 
-    biggestServerName = biggestserver(ET.parse('system.xml').getroot().find("servers"))
+    biggestServerName = biggestserver(ET.parse('../simulator/system.xml').getroot().find("servers"))
 
     while (data == "OK"):
         data = s.recv(1024).decode() 
