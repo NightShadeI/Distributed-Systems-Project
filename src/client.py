@@ -65,14 +65,14 @@ class Client:
         self.buildSocket()
         self.s.send("HELO".encode())
         while True:
-            data = s.recv(1024).decode()
+            data = self.s.recv(1024).decode()
             if data.startswith("OK"):
                 self.state.receive_ok()
             elif data.startswith("NONE"):
                 self.state.receive_none()
             elif data.startswith("JOBN"):
                 self.state.receive_job_request(data.split()[1:])
-            elif data.receive_quit("QUIT"):
+            elif data.startswith("QUIT"):
                 self.state.receive_quit()
 
 
