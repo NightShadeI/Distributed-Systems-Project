@@ -4,4 +4,17 @@ class State:
 		self.client = client
 
 
-	
+	def receive_ok(self):
+		raise Exception("Not implemented")
+
+
+	def receive_none(self):
+		raise Exception("Not implemented")
+
+
+	def receive_quit(self):
+		raise Exception("Not implemented")
+		
+
+	def receive_job_request(self):
+		raise Exception("Not implemented")
