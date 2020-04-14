@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 
 import socket
-import xml.etree.ElementTree as ET
 from states import *
+from strategies import *
 
-def biggestserver(servers):
-    biggest_server = servers[0]
-    for server in servers:
-        if int(server.attrib['coreCount']) > int(biggest_server.attrib['coreCount']):
-            biggest_server = server        
-    return biggest_server.attrib['type']
 
 class Client:
 
@@ -18,7 +12,7 @@ class Client:
         self.authState = authentication.AuthenticationState(self)
         self.jobExecutionState = jobexecution.JobExecutionState(self)
         self.quitState = quitstate.QuitState(self)
-        self.serverOptimiser = biggestserver
+        self.serverStrategy = biggestserver.BiggestServer()
         self.setState(self.getStartState())
 
 
@@ -43,12 +37,11 @@ class Client:
 
 
     def readSystemData(self):
-        self.tree = ET.parse('../simulator/system.xml')
+        self.serverStrategy.readSystemData()
 
 
-    def getServer(self):
-        # Not fully implemented yet
-        server = self.serverOptimiser(self.tree.getroot().find("servers"))
+    def getServer(self, params):
+        server = self.serverStrategy.calculate(params)
         return server
 
 

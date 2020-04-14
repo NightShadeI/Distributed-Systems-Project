@@ -16,7 +16,7 @@ class JobExecutionState(state.State):
 
 
 	def receive_job_request(self, params):
-		executing_server = self.client.getServer()
+		executing_server = self.client.getServer(params)
 		dataSend = " ".join(["SCHD", params[1], executing_server, "0"])
 		self.client.s.send(dataSend.encode())
 		
