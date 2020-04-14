@@ -74,6 +74,9 @@ class Client:
                 self.state.receive_job_request(data.split()[1:])
             elif data.startswith("QUIT"):
                 self.state.receive_quit()
+            else:
+                print("Unknown command", flush=True)
+                break
 
 
 if __name__ == "__main__":
