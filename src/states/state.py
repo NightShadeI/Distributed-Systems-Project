@@ -14,7 +14,10 @@ class State:
 
 	def receive_quit(self):
 		raise Exception("Not implemented")
-		
+
 
 	def receive_job_request(self):
+		raise Exception("Not implemented")
+
+	def receive_resource_request(self):
 		raise Exception("Not implemented")

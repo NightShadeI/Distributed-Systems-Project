@@ -16,8 +16,8 @@ class Strategy:
 
 
 	def calculate(self, jobParams):
-		self.loadParameters(jobParams)
-		return self.calculate_()
+		#self.loadParameters(jobParams)
+		return self.calculate_(jobParams)
 
 
 	def calculate_(self):

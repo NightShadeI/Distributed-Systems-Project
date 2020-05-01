@@ -12,7 +12,7 @@ class Client:
         self.authState = authentication.AuthenticationState(self)
         self.jobExecutionState = jobexecution.JobExecutionState(self)
         self.quitState = quitstate.QuitState(self)
-        self.serverStrategy = biggestserver.BiggestServer()
+        self.serverStrategy = firstfit.FirstFit()
         self.setState(self.getStartState())
 
 
