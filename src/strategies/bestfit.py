@@ -26,18 +26,22 @@ class BestFit(strategy.Strategy):
 		
 		for serverType in sysxml:
 			for server in servers:
-				#if server type is same and number of cores on server are more than the job requires. Note that:
-				#server[4] = number of server cores.
+		        	
+                                #Note that:
+				#Documentation defines fitness value as the difference between job cores and server cores.
+                                #server[4] = number of server cores.
 				#server[3] = available server time.
-				
+
+				#if serverType matches server[server_type_id] in servers.
 				if serverType == server[1] and server[4] > cores:
 					fitnessVal = server[4] - cores
+                                        
+                                        #if fitness value is less than bestfit or fitness value is same as bestFit and server available time is less than minAvail
 					if fitnessVal < bestFit or (fitnessVal == bestFit and server[3] < minAvail):
 						bestFit = fitnessVal
 						bestFitServer = server
 						minAvail = server[3]
 
-                #Filler logic.
                 #This if-else will look like: if bestFit : return bestFit : else : return bestFit Active server based on initial resource capacity. 
 		if bestFitServer != sys.maxsize:
 			return bestFitServer
