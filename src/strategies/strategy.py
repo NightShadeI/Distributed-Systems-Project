@@ -21,6 +21,8 @@ class Strategy:
 		#return self.calculate_(jobParams)
 		raise Exception("Not implemented")
 
-
+	'''
 	def calculate_(self):
 		raise Exception("Not implemented")
+	'''
+

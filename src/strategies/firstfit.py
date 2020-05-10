@@ -2,4 +2,4 @@ from strategies import strategy
 
 class FirstFit(strategy.Strategy):
 	def calculate(self, servers, job):
-		return servers[0][0]
+		return servers[0]

@@ -41,8 +41,8 @@ class Client:
         self.serverStrategy.readSystemData()
 
 
-    def getServer(self, params):
-        server = self.serverStrategy.calculate(params)
+    def getServer(self, servers, job):
+        server = self.serverStrategy.calculate(servers, job)
         return server
 
 
@@ -55,7 +55,7 @@ class Client:
         self.s.close()
 
 
-    def checkParams(self):
+    def checkArgs(self):
         parser = argparse.ArgumentParser()
         parser.add_argument('-a', required=True, help="specify algorithm")
         args = parser.parse_args()
@@ -81,7 +81,7 @@ class Client:
             elif data.startswith("NONE"):
                 self.state.receive_none()
             elif data.startswith("JOBN"):
-                self.state.receive_job_request(data.split()[1:])
+                self.state.handle_job_request(data.split()[1:])
             elif data.startswith("QUIT"):
                 self.state.receive_quit()
             else:
@@ -90,9 +90,9 @@ class Client:
 
 
 if __name__ == "__main__":
-    
+
     client = Client()
-    client.checkParams()
+    client.checkArgs()
     client.run()
 
 
