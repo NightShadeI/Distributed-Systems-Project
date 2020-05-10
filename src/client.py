@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import socket
+import sys
 from states import *
 from strategies import *
 
@@ -55,6 +56,8 @@ class Client:
 
 
     def run(self):
+        if len(sys.argv) < 3:
+            sys.exit("Not enough arguments (have you specified a strategy?)")
         self.buildSocket()
         self.s.send("HELO".encode())
         while True:
