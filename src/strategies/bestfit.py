@@ -36,7 +36,9 @@ class BestFit(strategy.Strategy):
 						bestFit = fitnessVal
 						bestFitServer = server
 						minAvail = server[3]
-			
+
+                #Filler logic.
+                #This if-else will look like: if bestFit : return bestFit : else : return bestFit Active server based on initial resource capacity. 
 		if bestFitServer != sys.maxsize:
 			return bestFitServer
 		else:
