@@ -39,15 +39,15 @@ class WorstFit(strategy.Strategy):
                                         #server[3] : server available in short amount of time.
 					elif fitnessVal > altFit and server[3] < defShortTime:
                                                 altFit = fitnessVal
-			
+		
+                #if: worstFit found, return worstFitServer	
 		if worstFit:
-                #if worstFit found, return worstFitServer
 			return worstFitServer
-                #elif altFit found, return altFitServer
+                #elif: altFit found, return altFitServer
                 elif altFit:
 			return altFitServer
+                #else: Return the worst-fit Active server based on  initial resource capacity.
                 else:
-                    #Return the rostfit Active server based on initial resource capacity.
-                    return server[0] 
+                         return server[0] 
             
             return servers[0]
