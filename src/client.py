@@ -2,6 +2,7 @@
 
 import socket
 import sys
+import argparse
 from states import *
 from strategies import *
 
@@ -13,7 +14,6 @@ class Client:
         self.authState = authentication.AuthenticationState(self)
         self.jobExecutionState = jobexecution.JobExecutionState(self)
         self.quitState = quitstate.QuitState(self)
-        self.serverStrategy = firstfit.FirstFit()
         self.setState(self.getStartState())
 
 
@@ -55,9 +55,23 @@ class Client:
         self.s.close()
 
 
+    def checkParams(self):
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-a', required=True, help="specify algorithm")
+        args = parser.parse_args()
+        if args.a:
+            if args.a == "ff":
+                self.serverStrategy = firstfit.FirstFit()
+            elif args.a == "bf":
+                self.serverStrategy = bestfit.BestFit()
+            elif args.a == "wf":
+                self.serverStrategy = worstfit.WorstFit()
+            else:
+                print("Invalid algorithm")
+                sys.exit(1)
+
+
     def run(self):
-        if len(sys.argv) < 3:
-            sys.exit("Not enough arguments (have you specified a strategy?)")
         self.buildSocket()
         self.s.send("HELO".encode())
         while True:
@@ -78,6 +92,7 @@ class Client:
 if __name__ == "__main__":
     
     client = Client()
+    client.checkParams()
     client.run()
 
 
