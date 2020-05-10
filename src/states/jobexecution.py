@@ -15,19 +15,19 @@ class JobExecutionState(state.State):
 		self.client.setState(self.client.getQuitState())
 
 
-	def receive_job_request(self, params):
-		self.client.s.send(' '.join(["RESC", "Avail",  params[3], params[4], params[5]]).encode())
-		resource_information = []
+	def handle_job_request(self, job):
+		self.client.s.send(' '.join(["RESC", "Avail",  job[3], job[4], job[5]]).encode())
+		servers = []
 		data = self.client.s.recv(1024).decode()
 		while data != ".":
 			if(data == "DATA"):
 				self.client.s.send("OK".encode())
 			else:
-				resource_information.append(data.split())
+				servers.append(data.split())
 				self.client.s.send("OK".encode())
 			data = self.client.s.recv(1024).decode()
 
-		executing_server = self.client.getServer(resource_information)
-		dataSend = " ".join(["SCHD", params[1], executing_server, "0"])
+		executing_server = self.client.getServer(servers, job)
+		dataSend = " ".join(["SCHD", job[1], executing_server, "0"])
 		self.client.s.send(dataSend.encode())
 

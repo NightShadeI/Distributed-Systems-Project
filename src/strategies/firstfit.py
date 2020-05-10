@@ -1,5 +1,5 @@
 from strategies import strategy
 
 class FirstFit(strategy.Strategy):
-	def calculate_(self, jobParams):
-		return jobParams[0][0]
+	def calculate(self, servers, job):
+		return servers[0][0]
