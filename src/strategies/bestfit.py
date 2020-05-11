@@ -3,25 +3,29 @@ from strategies import strategy
 class BestFit(strategy.Strategy):
 	def calculate(self, servers, job):
 
+                #Data in servers = nested array servers[0][0] containing resource information from ds-server.
+                #Servers data format: servers = [...,[server_type, server_type_id, server_state, server_avail_time, server_cores, server_mem, server_disk_space],...,]
+
+                #According to pseudocode: set bestFit and MinAvail to large number e.g. MAX_INT.
 		bestFit = sys.maxsize
 		bestFitServer = sys.maxsize
 		minAvail = sys.maxsize
 		
 		#Temporary, we can used loadParam() later, all these variables are purely for testing phase
-		submit_time = job[0]
+                #job data format:   JOBN 240 1566 1 200 1200
+                #jobN's data is simply stored in below variables
+                submit_time = job[0]
 		submit_job_id = job[1]
 		estimated_runtime = job[2]
 		cores = job[3]
 		memory = job[4]
 		disk = job[5]
 
-		#sysxml server types are: "tiny","small","medium","large","xlarge" -> map too serverType IDs -> 0, 1, 2, 3, 4, 5
+		#ServerTypes as defined by system.xml: "tiny","small","medium","large","xlarge" -> map to serverType IDs -> 0, 1, 2, 3, 4, 5
 		sysxml = [0,1,2,3,4,5]
 
-		
 		#Note that:		
 		#The fitness value of a job to a server is defined as the difference between the number of cores the job requires and that in the server.	
-			
 		#If server is idle -> availTime = serverType[boottime] + job[submit_time].
 		
 		for serverType in sysxml:

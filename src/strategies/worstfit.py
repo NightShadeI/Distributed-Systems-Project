@@ -6,7 +6,6 @@ class WorstFit(strategy.Strategy):
                 #Data in servers = nested array servers[0][0] containing resource information from ds-server.
                 #Servers data format: servers = [...,[server_type, server_type_id, server_state, server_avail_time, server_cores, server_mem, server_disk_space],...,]
 
-
 		#Might just use same variable to store values and server data in future due to python magic, leaving this for now.
                 #According to psuedocode: set worstFit and altFit to a very small number e.g. INT_MIN.
                 worstFit = -sys.maxsize -1
@@ -16,13 +15,15 @@ class WorstFit(strategy.Strategy):
                 defShortTime = 100
 		
 		#Temporary, we can used loadParam() later, all these variables are purely for testing phase
-                #Job info variables
+                #job data format:   JOBN 240 1566 1 200 1200
+                #Job data stored in variables below
 		submit_time = job[0]
 		submit_job_id = job[1]
 		estimated_runtime = job[2]
 		cores = job[3]
 		memory = job[4]
 		disk = job[5]
+
 
 		#Server types as defined by system.xml: "tiny","small","medium","large","xlarge" -> map to serverType IDs -> 0, 1, 2, 3, 4, 5
 		sysxml = [0,1,2,3,4,5]
