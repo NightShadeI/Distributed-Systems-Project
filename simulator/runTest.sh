@@ -2,8 +2,7 @@
 # to kill multiple runaway processes, use 'pkill runaway_process_name'
 # For the Java implementation, use the following format: ./tests1.sh your_client.class [-n]
 
-algorithm="ff"
-
+algorithm=$1
 trap "kill 0" EXIT
 
 echo "running their implementation..."
