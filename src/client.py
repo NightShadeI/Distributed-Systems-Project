@@ -72,6 +72,7 @@ class Client:
 
 
     def run(self):
+        self.checkArgs()
         self.buildSocket()
         self.s.send("HELO".encode())
         while True:
@@ -92,7 +93,6 @@ class Client:
 if __name__ == "__main__":
 
     client = Client()
-    client.checkArgs()
     client.run()
 
 

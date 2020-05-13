@@ -16,16 +16,14 @@ class JobExecutionState(state.State):
 
 
 	def handle_job_request(self, job):
-		self.client.s.send(' '.join(["RESC", "Capable",  job[3], job[4], job[5]]).encode())
+		self.client.s.send(' '.join(["RESC", "Capable", job[3], job[4], job[5]]).encode())
 		servers = []
 		data = self.client.s.recv(1024).decode()
 		while data != ".":
-			if(data == "DATA"):
-				self.client.s.send("OK".encode())
-			else:
+			if(data != "DATA"):
 				data_split = data.split()
 				servers.append(data.split())
-				self.client.s.send("OK".encode())
+			self.client.s.send("OK".encode())
 			data = self.client.s.recv(1024).decode()
 
 		executing_server = self.client.getServer(servers, job)

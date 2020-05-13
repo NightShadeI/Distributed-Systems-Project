@@ -18,8 +18,3 @@ class State:
 
 	def handle_job_request(self):
 		raise Exception("Not implemented")
-
-	'''
-	def receive_resource_request(self):
-		raise Exception("Not implemented")
-	'''

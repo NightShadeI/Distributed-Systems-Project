@@ -2,7 +2,7 @@ from strategies import strategy
 
 class BiggestServer(strategy.Strategy):
 
-	def calculate_(self):
+	def calculate(self, servers, job):
 		servers = self.tree.getroot().find("servers")
 		biggest_server = servers[0]
 		for server in servers:
