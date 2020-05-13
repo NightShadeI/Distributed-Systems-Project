@@ -8,8 +8,8 @@ class BestFit(strategy.Strategy):
 
                 #According to pseudocode: set bestFit and MinAvail to large number e.g. MAX_INT.
 		bestFit = sys.maxsize
-		bestFitServer = sys.maxsize
-		minAvail = sys.maxsize
+		bestFitServer = False
+                minAvail = sys.maxsize
 		
 		#Temporary, we can used loadParam() later, all these variables are purely for testing phase
                 #job data format:   JOBN 240 1566 1 200 1200
@@ -47,7 +47,7 @@ class BestFit(strategy.Strategy):
 						minAvail = server[3]
 
                 #This if-else will look like: if bestFit : return bestFit : else : return bestFit Active server based on initial resource capacity. 
-		if bestFitServer != sys.maxsize:
+		if bestFitServer != False:
 			return bestFitServer
 		else:
 			return servers[0]
