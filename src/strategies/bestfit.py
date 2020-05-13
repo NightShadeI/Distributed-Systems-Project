@@ -14,7 +14,7 @@ class BestFit(strategy.Strategy):
 		#Temporary, we can used loadParam() later, all these variables are purely for testing phase
                 #job data format:   JOBN 240 1566 1 200 1200
                 #jobN's data is simply stored in below variables
-                submit_time = job[0]
+		submit_time = job[0]
 		submit_job_id = job[1]
 		estimated_runtime = job[2]
 		cores = job[3]
@@ -50,4 +50,4 @@ class BestFit(strategy.Strategy):
 		if bestFitServer != sys.maxsize:
 			return bestFitServer
 		else:
-			return servers[0][0]
+			return servers[0]

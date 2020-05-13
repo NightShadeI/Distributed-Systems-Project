@@ -8,11 +8,11 @@ class WorstFit(strategy.Strategy):
 
 		#Might just use same variable to store values and server data in future due to python magic, leaving this for now.
                 #According to psuedocode: set worstFit and altFit to a very small number e.g. INT_MIN.
-                worstFit = -sys.maxsize -1
+		worstFit = -sys.maxsize -1
 		worstFitServer = -sys.maxsize -1
 		altFit = -sys.maxsize -1
-                altFitServer = -sys.maxsize -1
-                defShortTime = 100
+		altFitServer = -sys.maxsize -1
+		defShortTime = 100
 		
 		#Temporary, we can used loadParam() later, all these variables are purely for testing phase
                 #job data format:   JOBN 240 1566 1 200 1200
@@ -46,16 +46,16 @@ class WorstFit(strategy.Strategy):
 						worstFitServer = server
                                         #server[3] : server available in short amount of time.
 					elif fitnessVal > altFit and server[3] < defShortTime:
-                                                altFit = fitnessVal
+						altFit = fitnessVal
 		
                 #if: worstFit found, return worstFitServer	
 		if worstFit:
 			return worstFitServer
                 #elif: altFit found, return altFitServer
-                elif altFit:
+		elif altFit:
 			return altFitServer
                 #else: Return the worst-fit Active server based on  initial resource capacity.
-                else:
-                         return server[0] 
+		else:
+			return server[0] 
             
-            return servers[0]
+		return servers[0]
