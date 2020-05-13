@@ -17,7 +17,7 @@ class BestFit(strategy.Strategy):
             serverCores = int(server[4])
             coresRequired = int(job[3])
             serverAvailTime = int(server[3])
-            immediatelyAvail = -1
+            ready = -1
 
             if(serverState != unavailable):
                 if((serverCores - coresRequired >= 0 and serverCores - coresRequired < bestFit) or
@@ -30,6 +30,6 @@ class BestFit(strategy.Strategy):
             return bfServer
         else:
             for server in servers:
-                if(serverState != unavailable and serverAvailTime != immediatelyAvail):
+                if(serverState != unavailable and serverAvailTime != ready):
                     return server
             return bfServer
