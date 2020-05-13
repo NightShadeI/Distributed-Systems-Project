@@ -9,7 +9,7 @@ class BestFit(strategy.Strategy):
                 #According to pseudocode: set bestFit and MinAvail to large number e.g. MAX_INT.
 		bestFit = sys.maxsize
 		bestFitServer = False
-                minAvail = sys.maxsize
+		minAvail = sys.maxsize
 		
 		#Temporary, we can used loadParam() later, all these variables are purely for testing phase
                 #job data format:   JOBN 240 1566 1 200 1200
