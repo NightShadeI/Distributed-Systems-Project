@@ -24,8 +24,7 @@ class JobExecutionState(state.State):
 				self.client.s.send("OK".encode())
 			else:
 				data_split = data.split()
-				if int(data_split[2])!=4:
-					servers.append(data.split())
+				servers.append(data.split())
 				self.client.s.send("OK".encode())
 			data = self.client.s.recv(1024).decode()
 
