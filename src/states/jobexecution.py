@@ -18,7 +18,6 @@ class JobExecutionState(state.State):
 
 
 	def request_servers(self, current_job):
-		servers = []
 
 		# Get job information
 		required_cores = current_job.get_cores()
@@ -26,6 +25,7 @@ class JobExecutionState(state.State):
 		required_disk = current_job.get_disk()
 
 		# Get servers capable of running current job
+		servers = []
 		self.client.s.send(' '.join(["RESC", "Capable", required_cores, required_memory, required_disk]).encode())
 		data = self.client.s.recv(1024).decode()
 		while data != ".":
