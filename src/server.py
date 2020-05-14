@@ -41,7 +41,7 @@ class Server:
 
 
 	def is_available(self):
-		return not (self.get_state() < 4 or self.available_time() < 0)
+		return not (self.get_state() == 4 or self.available_time() < 0)
 
 
 	def can_run(self, job):

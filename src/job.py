@@ -2,7 +2,6 @@ class Job:
 
 	def __init__(self, job_params):
 
-		#job_params = job_params.split()
 		self.submit_time = job_params[0]
 		self.job_id = job_params[1]
 		self.estimated_runtime = int(job_params[2])

@@ -17,8 +17,15 @@ class JobExecutionState(state.State):
 		self.client.setState(self.client.getQuitState())
 
 
-	def request_servers(self):
+	def request_servers(self, current_job):
 		servers = []
+
+		# Get job information
+		required_cores = current_job.get_cores()
+		required_memory = current_job.get_memory()
+		required_disk = current_job.get_disk()
+
+		# Get servers capable of running current job
 		self.client.s.send(' '.join(["RESC", "Capable", required_cores, required_memory, required_disk]).encode())
 		data = self.client.s.recv(1024).decode()
 		while data != ".":
@@ -34,9 +41,6 @@ class JobExecutionState(state.State):
 		# Get job information
 		current_job = Job(job)
 		job_id = current_job.get_id()
-		required_cores = current_job.get_cores()
-		required_memory = current_job.get_memory()
-		required_disk = current_job.get_disk()
 		
 		# Get server to run job on
 		servers = self.request_servers()
