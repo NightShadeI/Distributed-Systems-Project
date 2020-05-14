@@ -4,30 +4,21 @@ from strategies import strategy
 class BestFit(strategy.Strategy):
     def calculate(self, servers, job):
 
-        found = False
-        best_fit = servers[0]
+        bestFit = 9999999
+        minAvail = 9999999
+        bfServer = servers[0]
 
-        # Iterate over servers
         for server in servers:
+            # if the difference between server cores and required job cores is greater than 0 
+            # and less than best fit
+            # OR
+            # 
+            if((server.cores_left(job) >= 0 and server.cores_left(job) < bestFit) or
+                    (server.cores_left(job) == bestFit and server.get_available_time() < minAvail)):
+                bestFit = server.cores_left(job)
+                minAvail = server.get_available_time()
+                bfServer = server  
 
-            server_available = server.is_available()
-            # If an available server has been found, non-availables don't matter
-            if found and not server_available:
-                pass
+        return bfServer
 
-            # If this is the first available server, set it to the current best
-            if not found and server_available:
-                found = True
-                best_fit = server
-                pass
-
-            # Get the current and best core counts
-            current_difference = server.cores_left(job)
-            best_difference = best_fit.cores_left(job)
-
-            # If this core count is better than the best
-            if ((core_difference < best_difference) or 
-            (core_difference == best_difference and server.get_available_time() < best_fit.get_available_time())):
-                best_fit = server
-
-        return best_fit
+         

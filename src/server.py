@@ -13,7 +13,7 @@ class Server:
 
 
 	def get_name(self):
-		return self.server_name
+		return self.name
 
 
 	def get_id(self):
@@ -21,7 +21,7 @@ class Server:
 
 
 	def get_state(self):
-		return self.server_state
+		return self.state
 
 
 	def get_available_time(self):
@@ -38,10 +38,6 @@ class Server:
 
 	def get_disk(self):
 		return self.disk
-
-
-	def is_available(self):
-		return not (self.get_state() == 4 or self.available_time() < 0)
 
 
 	def can_run(self, job):
