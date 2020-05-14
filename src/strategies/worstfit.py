@@ -24,12 +24,12 @@ class WorstFit(strategy.Strategy):
 			elif worst_nonavailable is None or (server.cores_left(job) > worst_nonavailable.cores_left(job)):
 				best_nonavailable = server
 	
-	#if worstFit found, return it
-	if worst_fit is not None:
-		return worst_fit
-	#Otherwise, if alt_fit found, return this
-	if alt_fit is not None:
-		return alt_fit
-	# otherwise just determine the worsed based on whatever is capable of running a job
-	return best_nonavailable
+		#if worstFit found, return it
+		if worst_fit is not None:
+			return worst_fit
+		#Otherwise, if alt_fit found, return this
+		if alt_fit is not None:
+			return alt_fit
+		# otherwise just determine the worsed based on whatever is capable of running a job
+		return best_nonavailable
 			
