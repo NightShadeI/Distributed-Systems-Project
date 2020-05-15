@@ -20,9 +20,9 @@ class JobExecutionState(state.State):
 	def request_servers(self, current_job):
 
 		# Get job information
-		required_cores = current_job.get_cores()
-		required_memory = current_job.get_memory()
-		required_disk = current_job.get_disk()
+		required_cores = str(current_job.get_cores())
+		required_memory = str(current_job.get_memory())
+		required_disk = str(current_job.get_disk())
 
 		# Get servers capable of running current job
 		servers = []
@@ -43,7 +43,7 @@ class JobExecutionState(state.State):
 		job_id = current_job.get_id()
 		
 		# Get server to run job on
-		servers = self.request_servers()
+		servers = self.request_servers(current_job)
 		executing_server = self.client.getServer(servers, current_job)
 
 		# send this server

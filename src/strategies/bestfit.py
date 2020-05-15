@@ -1,33 +1,38 @@
 from strategies import strategy
 
-
 class BestFit(strategy.Strategy):
     def calculate(self, servers, job):
 
-        found = False
-        best_fit = servers[0]
+        # Initialise variables which mark best-fit
+        bestFit = 9999999
+        minAvail = 9999999
+        bfServer = servers[0]
 
-        # Iterate over servers
-        for server in servers:
+        # Get system data (Read in via inherited class Strategy.py)
+        system = self.tree.getroot()
 
-            server_available = server.is_available()
-            # If an available server has been found, non-availables don't matter
-            if found and not server_available:
-                pass
+        # Iterate server types in order of appearance in system.xml
+        for serverDefinitions in system[0]:
+            serverType = serverDefinitions.attrib["type"]
 
-            # If this is the first available server, set it to the current best
-            if not found and server_available:
-                found = True
-                best_fit = server
-                pass
+            # Iterate all servers returned by ds-server response to RESC Capable
+            for server in servers:
 
-            # Get the current and best core counts
-            current_difference = server.cores_left(job)
-            best_difference = best_fit.cores_left(job)
+                #Check if name of current server matches server attribute in system.xml
+                if(server.get_name() == serverType):
 
-            # If this core count is better than the best
-            if ((core_difference < best_difference) or 
-            (core_difference == best_difference and server.get_available_time() < best_fit.get_available_time())):
-                best_fit = server
+                    # If the first condition is true, bfServer satisfies "alt best fit" 
+                    #    -> (i.e. bfServer = best-fit Active server based on initial resource capacity)
+                    # OR
+                    # bfServer satisfies "best fit" condition
+                    #    -> (i.e. bfServer = best-fit server based on fitness value and minAvail time)
+                    if((server.can_run(job) and server.cores_left(job) < bestFit) or
+                        (server.cores_left(job) == bestFit and server.get_available_time() < minAvail)):
 
-        return best_fit
+                        # If new bfServer or Active bfServer found, then reassign marker variables
+                        bestFit = server.cores_left(job)
+                        minAvail = server.get_available_time()
+                        bfServer = server
+
+        return bfServer
+
