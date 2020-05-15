@@ -1,3 +1,10 @@
+"""
+Distributed Systems group project
+Authors: Abhinav Ram
+Student ID: 45157855
+Practical session: Friday 10:00am
+"""
+
 from strategies import strategy
 
 class BestFit(strategy.Strategy):
