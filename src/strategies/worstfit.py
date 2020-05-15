@@ -13,8 +13,8 @@ class WorstFit(strategy.Strategy):
             serverType = serverDefinitions.attrib["type"]
             for server in servers:
                 if(server.get_name() == serverType):    
-                    if server.cores_left(job) >= 0:
-                        if (server.cores_left(job) > worstFit) and (2 <= server.get_state() <= 3):
+                    if server.can_run(job):
+                        if (server.cores_left(job) > worstFit) and ((2 <= server.get_state() <= 3) or server.get_available_time() == job.get_submit_time()):
                             worstFit = server.cores_left(job)
                             worst_server = server
                         elif server.cores_left(job) > altFit and (server.get_available_time() != -1):

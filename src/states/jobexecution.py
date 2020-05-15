@@ -60,6 +60,6 @@ class JobExecutionState(state.State):
 		executing_server = self.client.getServer(servers, current_job)
 
 		# send this server with the corresponding job id
-		dataSend = " ".join(["SCHD", job_id, executing_server.get_name(), executing_server.get_id()])
+		dataSend = " ".join(["SCHD", str(job_id), executing_server.get_name(), str(executing_server.get_id())])
 		self.client.s.send(dataSend.encode())
 

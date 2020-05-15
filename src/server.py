@@ -12,7 +12,7 @@ class Server:
 		# split and set server parameters
 		server_params = server_params.split()
 		self.name = server_params[0]
-		self.id = server_params[1]
+		self.id = int(server_params[1])
 		self.state = int(server_params[2])
 		self.available_time = int(server_params[3])
 		self.cores = int(server_params[4])
