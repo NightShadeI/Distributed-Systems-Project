@@ -1,7 +1,17 @@
+#!/usr/bin/env python3
+
+"""
+Distributed Systems group project
+Authors: Thomas Tapner
+Student ID: 45387168
+Practical session: Friday 10:00am
+"""
+
 class Job:
 
 	def __init__(self, job_params):
 
+		# set job parameters
 		self.submit_time = job_params[0]
 		self.job_id = job_params[1]
 		self.estimated_runtime = int(job_params[2])

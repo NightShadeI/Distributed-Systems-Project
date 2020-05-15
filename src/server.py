@@ -1,7 +1,15 @@
+"""
+Distributed Systems group project
+Authors: Thomas Tapner
+Student ID: 45387168
+Practical session: Friday 10:00am
+"""
+
 class Server:
 
 	def __init__(self, server_params):
 
+		# split and set server parameters
 		server_params = server_params.split()
 		self.name = server_params[0]
 		self.id = server_params[1]
@@ -41,6 +49,7 @@ class Server:
 
 
 	def can_run(self, job):
+		# check the server has sufficient resources to run the job
 		core_check = self.get_cores() >= job.get_cores()
 		memory_check = self.get_memory() >= job.get_memory()
 		disk_check = self.get_disk() >= job.get_disk()
