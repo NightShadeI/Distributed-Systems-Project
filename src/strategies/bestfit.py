@@ -27,7 +27,7 @@ class BestFit(strategy.Strategy):
                     # bfServer satisfies "best fit" condition
                     #    -> (i.e. bfServer = best-fit server based on fitness value and minAvail time)
                     if((server.can_run(job) and server.cores_left(job) < bestFit) or
-                        (server.cores_left(job) == bestFit and server.get_available_time() < minAvail)):
+                        (server.can_run(job) and server.cores_left(job) == bestFit and server.get_available_time() < minAvail)):
 
                         # If new bfServer or Active bfServer found, then reassign marker variables
                         bestFit = server.cores_left(job)
