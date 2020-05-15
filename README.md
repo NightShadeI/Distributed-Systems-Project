@@ -20,7 +20,7 @@ If successful, your resource-efficient job scheduler should now run!
 ### Comparing Baseline Algorithms
 Within the /simulator directory you can compare baseline algorithms (first-fit, best-fit, worst-fit) implemented by MQ Uni's simulator: `ds-client` and our baseline implementations within our client simulator: `/src/client.py`
 
-Simply run the bash script `run-comparison-test.sh {{algorithm}}` where {{algorithm}} is replaced by your choice of algorithm: ff, bf, wf.
+Simply run the bash script `run-comparison-test.sh {{algorithm}} {{config_file}}` where {{algorithm}} is replaced by your choice of algorithm: ff, bf, wf and {{config_file}} is replaced by your choice of xml config file e.g. configs/ds-config01.xml.
 
 Example usage:
-`./run-comparison-test.sh bf` -> This runs the different baseline algorithm implementations of `bf` = best-fit in `simulator/ds-client` and `src/client.py`, compares the output for any differences.
+`./run-comparison-test.sh bf configs/ds-config01.xml` -> This runs the different baseline algorithm implementations of `bf` = best-fit in `simulator/ds-client` and `src/client.py`, compares the output for any differences.
