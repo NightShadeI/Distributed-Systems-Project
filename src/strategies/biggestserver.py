@@ -7,5 +7,5 @@ class BiggestServer(strategy.Strategy):
 		biggest_server = servers[0]
 		for server in servers:
 		    if server.get_cores() > biggest_server.get_cores():
-		        biggest_server = server        
+		        biggest_server = server
 		return biggest_server

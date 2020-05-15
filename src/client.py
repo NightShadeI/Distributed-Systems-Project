@@ -69,7 +69,7 @@ class Client:
 
         # check if -a command line argument exists
         parser = argparse.ArgumentParser()
-        parser.add_argument('-a', required=True, help="specify algorithm")
+        parser.add_argument('-a', help="specify algorithm")
         args = parser.parse_args()
 
         # set the strategy dependant on what the value of -a is
@@ -80,9 +80,8 @@ class Client:
                 self.serverStrategy = bestfit.BestFit()
             elif args.a == "wf":
                 self.serverStrategy = worstfit.WorstFit()
-            else:
-                print("Invalid algorithm")
-                sys.exit(1)
+        else:
+            self.serverStrategy = biggestserver.BiggestServer()
 
 
     def run(self):
