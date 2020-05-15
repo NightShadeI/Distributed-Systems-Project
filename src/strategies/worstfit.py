@@ -9,15 +9,17 @@ class WorstFit(strategy.Strategy):
         worst_server = servers[0]
         alt_server = servers[0]
         system = self.tree.getroot()
-        for serverType in system[0]:
-            for server in servers: 
-                if server.cores_left(job) >= 0:
-                    if (server.cores_left(job) > worstFit) and (2 <= server.get_state() <= 3):
-                        worstFit = server.cores_left(job)
-                        worst_server = server
-                    elif server.cores_left(job) > altFit and (server.get_available_time() != -1):
-                        altFit = server.cores_left(job)
-                        alt_server = server
+        for serverDefinitions in system[0]:
+            serverType = serverDefinitions.attrib["type"]
+            for server in servers:
+                if(server.get_name() == serverType):    
+                    if server.cores_left(job) >= 0:
+                        if (server.cores_left(job) > worstFit) and (2 <= server.get_state() <= 3):
+                            worstFit = server.cores_left(job)
+                            worst_server = server
+                        elif server.cores_left(job) > altFit and (server.get_available_time() != -1):
+                            altFit = server.cores_left(job)
+                            alt_server = server
             if worstFit >= 0:
                 return worst_server
             if altFit >= 0:

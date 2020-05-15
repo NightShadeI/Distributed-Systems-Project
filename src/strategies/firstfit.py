@@ -13,10 +13,11 @@ class FirstFit(strategy.Strategy):
 		# get the root element
 		system = self.tree.getroot()
 		# Iterate over each of the server types
-		for serverType in system[0]:
+		for serverDefinitions in system[0]:
+			serverType = serverDefinitions.attrib["type"]
 			# Iterate over possible servers, only returning the first match of the server type that can run the job
 			for server in servers:
-				if(serverType.attrib["type"] == server.get_name() and server.can_run(job)):
+				if(serverType == server.get_name() and server.can_run(job)):
 					return server
 		# If none capable of running job, just return the first server
 		return servers[0]
