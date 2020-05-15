@@ -1,3 +1,10 @@
+"""
+Distributed Systems group project
+Authors: Thomas Tapner, Abhinav Ram, Cooper Timewell
+Student ID: 45387168, 45157855, 45429596
+Practical session: Friday 10:00am
+"""
+
 from states import state
 from job import Job
 from server import Server
@@ -9,10 +16,12 @@ class JobExecutionState(state.State):
 
 
 	def receive_ok(self):
+		# alert the server we are ready to receive jobs
 		self.client.s.send("REDY".encode())
 
 
 	def receive_none(self):
+		# When there are no more jobs left, quit
 		self.client.s.send("QUIT".encode())
 		self.client.setState(self.client.getQuitState())
 
@@ -28,9 +37,13 @@ class JobExecutionState(state.State):
 		servers = []
 		self.client.s.send(' '.join(["RESC", "Capable", required_cores, required_memory, required_disk]).encode())
 		data = self.client.s.recv(1024).decode()
+
+		# No more servers when server sends '.'
 		while data != ".":
+			# Create server object when server data received
 			if(data != "DATA"):
 				servers.append(Server(data))
+			# Continue to receive server information
 			self.client.s.send("OK".encode())
 			data = self.client.s.recv(1024).decode()
 		return servers
@@ -46,7 +59,7 @@ class JobExecutionState(state.State):
 		servers = self.request_servers(current_job)
 		executing_server = self.client.getServer(servers, current_job)
 
-		# send this server
+		# send this server with the corresponding job id
 		dataSend = " ".join(["SCHD", job_id, executing_server.get_name(), executing_server.get_id()])
 		self.client.s.send(dataSend.encode())
 
