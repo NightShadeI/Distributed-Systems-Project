@@ -1,4 +1,0 @@
-2c2
-< # Server-side simulator started with './ds-server -c configs/daconfig.xml -v all'
----
-> # Server-side simulator started with '../ds-sim/ds-server -c configs/daconfig.xml -v all'
