@@ -12,7 +12,7 @@ Example usage: `./ds-server -c configs/ds-config1.xml -v all`
 
 ### Running the Client
 Once you have started the server, you now need to run your client. Ensure you are in the /src directory, and, in a separate terminal window, run the following command:
-`python3 client.py`
+`python3 client.py -a {{algorithm}}`
 
 If successful, your resource-efficient job scheduler should now run!
 
