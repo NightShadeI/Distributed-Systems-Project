@@ -3,7 +3,7 @@ from strategies import strategy
 class WorstFit(strategy.Strategy):
 
     def calculate(self, servers, job):
-        	
+
         worstFit = -9999999
         altFit = -9999999
         worst_server = servers[0]
@@ -20,9 +20,9 @@ class WorstFit(strategy.Strategy):
                         elif server.cores_left(job) > altFit and (server.get_available_time() != -1):
                             altFit = server.cores_left(job)
                             alt_server = server
-            if worstFit >= 0:
-                return worst_server
-            if altFit >= 0:
-                return alt_server
+        if worstFit >= 0:
+            return worst_server
+        if altFit >= 0:
+            return alt_server
        
         return worst_server
