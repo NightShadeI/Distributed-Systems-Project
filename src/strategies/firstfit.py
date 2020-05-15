@@ -1,6 +1,6 @@
 """
 Distributed Systems group project
-Authors: Thomas Tapne
+Authors: Thomas Tapner
 Student ID: 45387168
 Practical session: Friday 10:00am
 """
