@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+"""
+Distributed Systems group project
+Authors: Thomas Tapner, Abhinav Ram, Cooper Timewell
+Student ID: 45387168, 45157855, 45429596
+Practical session: Friday 10:00am
+"""
+
 import socket
 import sys
 import argparse
@@ -10,6 +17,8 @@ from strategies import *
 class Client:
 
     def __init__(self):
+
+        # Define and set the states
         self.startState = start.StartState(self)
         self.authState = authentication.AuthenticationState(self)
         self.jobExecutionState = jobexecution.JobExecutionState(self)
@@ -42,6 +51,7 @@ class Client:
 
 
     def getServer(self, servers, job):
+        # Use the strategy set to find the server given a job
         server = self.serverStrategy.calculate(servers, job)
         return server
 
@@ -56,9 +66,13 @@ class Client:
 
 
     def checkArgs(self):
+
+        # check if -a command line argument exists
         parser = argparse.ArgumentParser()
         parser.add_argument('-a', required=True, help="specify algorithm")
         args = parser.parse_args()
+
+        # set the strategy dependant on what the value of -a is
         if args.a:
             if args.a == "ff":
                 self.serverStrategy = firstfit.FirstFit()
@@ -72,8 +86,13 @@ class Client:
 
 
     def run(self):
+
+        # setup client
         self.checkArgs()
         self.buildSocket()
+
+        # call upon state method depending on message received from server
+        # state handles responses
         self.s.send("HELO".encode())
         while True:
             data = self.s.recv(1024).decode()
@@ -92,6 +111,7 @@ class Client:
 
 if __name__ == "__main__":
 
+    # run the client
     client = Client()
     client.run()
 
